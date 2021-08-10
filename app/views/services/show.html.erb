@@ -1,0 +1,17 @@
+<h1 class="m-3"><%= "#{@service.title} service" %></h1>
+
+<div class="m-3">
+  <p><%= "Description: #{@service.description}" %></p>
+  <p><%= "Price: #{@service.price}€" %></p>
+  <p><%= "Address: #{@service.address}" %></p>
+</div>
+
+<%= link_to "Book service", services_path, class: "btn btn-primary ml-3" %>
+
+<% if policy(@service).update? %>
+  <%= link_to "Edit service", edit_service_path(@service), class: "btn btn-secondary" %>
+<% end %>
+
+<% if policy(@service).destroy? %>
+  <%= link_to "Destroy service", service_path(@service), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+<% end %>
