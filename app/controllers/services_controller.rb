@@ -1,5 +1,5 @@
 class ServicesController < ApplicationController
-  before_action :set_service, only: [:show, :destroy]
+  before_action :set_service, only: [:show, :edit, :update, :destroy]
 
   def index
     @services = policy_scope(Service)
@@ -19,9 +19,20 @@ class ServicesController < ApplicationController
     authorize @service
 
     if @service.save
-      redirect_to services_path, notice: "Service was successfully created."
+      redirect_to service_path(@service), notice: "Service was successfully created."
     else
       render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @service.update(service_params)
+      redirect_to service_path(@service), notice: "Service was successfully updated."
+    else
+      render :edit
     end
   end
 
