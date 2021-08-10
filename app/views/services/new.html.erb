@@ -1,0 +1,10 @@
+<h1 class="ml-3 mt-3">Create a service</h1>
+
+<%= simple_form_for @service, html: { class: "m-3" } do |f| %>
+  <%= f.input :title %>
+  <%= f.input :description %>
+  <%= f.input :price %>
+  <%= f.input :address %>
+  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+  <%= f.submit %>
+<% end %>

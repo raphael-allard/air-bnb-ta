@@ -1,5 +1,5 @@
 <%= link_to services_path, class: "card-service" do %>
-  <%= cl_image_tag service.photos.first.key %>
+  <%= render "components/carousel", service: service %>
 
   <div class="card-service__infos">
     <h2><%= service.title %></h2>

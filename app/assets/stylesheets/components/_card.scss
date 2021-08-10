@@ -11,10 +11,11 @@
     transform: scale(1.03);
   }
 
-  img {
+  .carousel {
     width: 20%;
-    height: 100%;
-    object-fit: cover;
+    img {
+      height: 120px;
+    }
   }
 
   .card-service__infos {
