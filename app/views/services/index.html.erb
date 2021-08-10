@@ -1,0 +1,7 @@
+<h1 class="ml-3 mt-3">All services</h1>
+
+<div class="ml-3 mb-5">
+  <% @services.each do |service| %>
+    <%= render "components/card_service", service: service %>
+  <% end %>
+</div>

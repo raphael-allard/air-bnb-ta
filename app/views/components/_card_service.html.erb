@@ -1,0 +1,10 @@
+<%= link_to services_path, class: "card-service" do %>
+  <%= cl_image_tag service.photos.first.key %>
+
+  <div class="card-service__infos">
+    <h2><%= service.title %></h2>
+    <p><%= "Description: #{service.description}" %></p>
+    <p><%= "Price: #{service.price}" %></p>
+    <p><%= "Address: #{service.address}" %></p>
+  </div>
+<% end %>
