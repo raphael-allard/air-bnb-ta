@@ -5,11 +5,15 @@ class ServicePolicy < ApplicationPolicy
     end
   end
 
-  def new?
-    create?
+  def show?
+    true
   end
 
   def create?
     true
+  end
+
+  def destroy?
+    record.user == user
   end
 end
