@@ -1,4 +1,4 @@
-<h1 class="m-3"><%= "#{@service.title} service" %></h1>
+<h1 class="m-3"><%= "#{@service.title} service by #{@service.user.username}" %></h1>
 
 <div class="m-3">
   <p><%= "Description: #{@service.description}" %></p>
@@ -6,12 +6,33 @@
   <p><%= "Address: #{@service.address}" %></p>
 </div>
 
-<%= link_to "Book service", services_path, class: "btn btn-primary ml-3" %>
+<% unless @service.user == current_user %>
+  <h2 class="ml-3 mt-5">Book service:</h2>
+
+  <%= simple_form_for [@service, @booking], html: { class: "m-3" } do |f| %>
+    <%= f.input :start_date, html5: true %>
+    <%= f.input :end_date, html5: true %>
+    <%= f.submit class: "btn btn-primary" %>
+  <% end %>
+<% end %>
 
 <% if policy(@service).update? %>
-  <%= link_to "Edit service", edit_service_path(@service), class: "btn btn-secondary" %>
+  <%= link_to "Edit service", edit_service_path(@service), class: "btn btn-secondary ml-3" %>
 <% end %>
 
 <% if policy(@service).destroy? %>
   <%= link_to "Destroy service", service_path(@service), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+<% end %>
+
+<% if @service.user == current_user %>
+  <div class="ml-3 mt-5">
+    <h2>Next bookings:</h2>
+
+    <% @service.bookings.each_with_index do |booking, index| %>
+      <p><u><%= "BOOKING N°#{index + 1}" %></u></p>
+      <p><%= "Booked from: #{booking.start_date.strftime("%A, %d %b %Y %l:%M %p")}" %>
+      <p><%= "To: #{booking.end_date.strftime("%A, %d %b %Y %l:%M %p")}" %></p>
+      <p><%= "By: #{booking.user.username}" %></p>
+    <% end %>
+  </div>
 <% end %>
