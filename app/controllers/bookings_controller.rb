@@ -3,7 +3,7 @@ class BookingsController < ApplicationController
 
   def index
     @my_bookings = policy_scope(Booking).where(user: current_user)
-    @booking_clients = current_user.booking_clients
+    @clients_booking = current_user.clients_booking
   end
 
   def create
