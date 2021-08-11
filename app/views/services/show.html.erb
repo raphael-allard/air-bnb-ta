@@ -24,15 +24,3 @@
   <%= link_to "Destroy service", service_path(@service), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
 <% end %>
 
-<% if @service.user == current_user %>
-  <div class="ml-3 mt-5">
-    <h2>Next bookings:</h2>
-
-    <% @service.bookings.each_with_index do |booking, index| %>
-      <p><u><%= "BOOKING N°#{index + 1}" %></u></p>
-      <p><%= "Booked from: #{booking.start_date.strftime("%A, %d %b %Y %l:%M %p")}" %>
-      <p><%= "To: #{booking.end_date.strftime("%A, %d %b %Y %l:%M %p")}" %></p>
-      <p><%= "By: #{booking.user.username}" %></p>
-    <% end %>
-  </div>
-<% end %>

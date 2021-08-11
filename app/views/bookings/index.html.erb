@@ -1,0 +1,15 @@
+<h2 class="ml-3 mt-3">What I booked:</h2>
+
+<div class="d-flex flex-wrap">
+  <% @my_bookings.each do |booking| %>
+    <%= render "bookings/partials/card_booking", booking: booking %>
+  <% end %>
+</div>
+
+<h2 class="ml-3 mt-3">What they booked with me:</h2>
+
+<div class="d-flex flex-wrap">
+  <% @booking_clients.each do |booking| %>
+    <%= render "bookings/partials/card_booking", booking: booking %>
+  <% end %>
+</div>

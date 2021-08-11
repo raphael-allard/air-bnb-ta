@@ -1,0 +1,16 @@
+<div id="booking-<%= booking.id %>" class="card-booking">
+  <%= link_to booking.service.title, service_path(booking.service) %>
+  <p><%= "Start: #{booking.start_date.strftime("%a, %d %b %Y at %l:%M%p")}" %>
+  <p><%= "End: #{booking.end_date.strftime("%a, %d %b %Y at %l:%M%p")}" %></p>
+  <p><%= "From: #{booking.user.username}" %></p>
+  <p><%= "Status: #{booking.status}" %></p>
+
+  <% if policy(booking).update? && booking.status_pending? %>
+    <%= link_to "Accept", booking_path(booking, status: "accepted"), method: :patch, class: "btn btn-success mb-4" %>
+    <%= link_to "Decline", booking_path(booking, status: "declined"), method: :patch, class: "btn btn-danger mb-4" %>
+  <% end %>
+
+  <% if policy(booking).destroy? %>
+    <%= link_to "Delete", booking_path(booking), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-warning" %>
+  <% end %>
+</div>

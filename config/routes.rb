@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :services do
     resources :bookings, only: [:create]
   end
+
+  resources :bookings, only: [:index, :update, :destroy]
 end
