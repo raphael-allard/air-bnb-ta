@@ -10,6 +10,6 @@
 
 <div class="d-flex flex-wrap">
   <% @clients_booking.each do |booking| %>
-    <%= render "bookings/partials/card_booking", booking: booking %>
+    <%= render "bookings/partials/card_booking", booking: booking, review: @review %>
   <% end %>
 </div>

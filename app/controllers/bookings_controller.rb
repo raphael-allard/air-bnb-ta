@@ -3,16 +3,17 @@ class BookingsController < ApplicationController
 
   def index
     @my_bookings = policy_scope(Booking).where(user: current_user)
-    @clients_booking = current_user.clients_booking
+    @clients_booking = policy_scope(Booking).includes(:service).where(services: { user: current_user })
+    # @clients_booking = current_user.clients_booking
+    @review = Review.new
   end
 
   def create
     @booking = Booking.new(booking_params)
-    authorize @booking
-
     @service = Service.find(params[:service_id])
     @booking.service = @service
     @booking.user = current_user
+    authorize @booking
 
     if @booking.save
       redirect_to bookings_path(anchor: "booking-#{@booking.id}"), notice: "Booking was successfully created."
