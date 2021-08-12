@@ -13,4 +13,8 @@
   <% if policy(booking).destroy? %>
     <%= link_to "Delete", booking_path(booking), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-warning" %>
   <% end %>
+
+  <% if policy(Review).new? %>
+    <%= link_to "New review", new_booking_review_path(booking, @review) %>
+  <% end %>
 </div>

@@ -6,7 +6,7 @@
   <p><%= "Address: #{@service.address}" %></p>
 </div>
 
-<% unless @service.user == current_user %>
+<% if policy(Booking).new? %>
   <h2 class="ml-3 mt-5">Book service:</h2>
 
   <%= simple_form_for [@service, @booking], html: { class: "m-3" } do |f| %>
@@ -24,3 +24,7 @@
   <%= link_to "Destroy service", service_path(@service), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
 <% end %>
 
+<% @service.reviews.each do |review| %>
+  <p><%= review.rating %></p>
+  <p><%= review.comment %></p>
+<% end %>
