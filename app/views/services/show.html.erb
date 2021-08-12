@@ -6,7 +6,7 @@
   <p><%= "Address: #{@service.address}" %></p>
 </div>
 
-<% if policy(Booking).create? %>
+<% if policy(Booking).new? %>
   <h2 class="ml-3 mt-5">Book service:</h2>
 
   <%= simple_form_for [@service, @booking], html: { class: "m-3" } do |f| %>
