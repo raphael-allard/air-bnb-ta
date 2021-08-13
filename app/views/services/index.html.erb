@@ -1,10 +1,18 @@
-<h1 class="ml-3 mt-3">All services</h1>
+<h1 class="ml-3 mt-3 text-center">All services</h1>
 
 <div class="d-flex">
-  <div class="ml-3 mb-5">
-    <% @services.each do |service| %>
-      <%= render "services/partials/card_service", service: service %>
+  <div data-controller="refresh-services-list">
+    <%= form_with url: services_path,
+                  method: :get,
+                  html: { class: "ml-3", data: { refresh_services_list_target: "form" } } do |f| %>
+      <%= f.text_field :query,
+                      placeholder: "Search a service",
+                      data: {
+                        refresh_services_list_target: "input",
+                        action: "keyup->refresh-services-list#update" } %>
     <% end %>
+
+    <%= render "services/partials/list", services: @services %>
   </div>
 
   <div id="map"

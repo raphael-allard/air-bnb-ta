@@ -1,0 +1,5 @@
+<div class="ml-3 mb-5" data-refresh-services-list-target="list">
+  <% @services.each do |service| %>
+    <%= render "services/partials/card_service", service: service %>
+  <% end %>
+</div>

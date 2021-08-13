@@ -4,12 +4,21 @@ class ServicesController < ApplicationController
   def index
     @services = policy_scope(Service)
 
+    if params[:query]
+      @services = @services.where("title ILIKE ?", "%#{params[:query]}%")
+    end
+
     @markers = @services.geocoded.map do |service|
       {
         lat: service.latitude,
         lng: service.longitude,
         info_window: render_to_string(partial: "services/partials/info_window", locals: { service: service })
       }
+    end
+
+    respond_to do |format|
+      format.html
+      format.text { render partial: "services/partials/list", locals: { services: @services } }
     end
   end
 
