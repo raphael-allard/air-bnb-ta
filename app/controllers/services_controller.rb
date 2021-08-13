@@ -4,8 +4,12 @@ class ServicesController < ApplicationController
   def index
     @services = policy_scope(Service)
 
-    if params[:query]
-      @services = @services.where("title ILIKE ?", "%#{params[:query]}%")
+    if params[:stimulus_query].present?
+      @services = @services.where("title ILIKE ?", "%#{params[:stimulus_query]}%")
+    elsif params[:title_username].present?
+      @services = @services.search_by_title_username(params[:title_username])
+    elsif params[:address].present?
+      @services = @services.where("address ILIKE ?", "%#{params[:address]}%")
     end
 
     @markers = @services.geocoded.map do |service|

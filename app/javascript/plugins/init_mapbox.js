@@ -13,8 +13,10 @@ const initMapbox = () => {
 
     const markers = JSON.parse(mapElement.dataset.markers);
 
-    fitMapToMarkers(map, markers);
-    addMarkersToMap(map, markers);
+    if(markers.length > 0) {
+      fitMapToMarkers(map, markers);
+      addMarkersToMap(map, markers);
+    }
   }
 };
 
