@@ -60,7 +60,7 @@ super_escort_1 = Service.new(title: "Super Escort", description: "To book if you
 add_photos(super_escort_1)
 puts "#{super_escort_1.title} created!"
 
-super_rescue_2 = Service.new(title: "Super Rescue", description: "To book if you are in danger!", price: 320, address: "Place du Dome Centre commercial les 4 Temps, Puteaux", user: catwoman)
+super_rescue_2 = Service.new(title: "Super Rescue", description: "To book if you are in danger!", price: 320, address: "129 Rue de Grenelle, Paris", user: catwoman)
 add_photos(super_rescue_2)
 puts "#{super_rescue_2.title} created!"
 

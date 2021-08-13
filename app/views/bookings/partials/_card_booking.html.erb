@@ -1,7 +1,13 @@
 <div id="booking-<%= booking.id %>" class="card-booking">
   <%= link_to booking.service.title, service_path(booking.service) %>
-  <p><%= "Start: #{booking.start_date.strftime("%a, %d %b %Y at %l:%M%p")}" %>
-  <p><%= "End: #{booking.end_date.strftime("%a, %d %b %Y at %l:%M%p")}" %></p>
+
+  <% if booking.end_date > Date.today %>
+    <p><%= "Start: #{booking.start_date.strftime("%a, %d %b %Y at %l:%M%p")}" %>
+    <p><%= "End: #{booking.end_date.strftime("%a, %d %b %Y at %l:%M%p")}" %></p>
+  <% else %>
+    <p>Booking past</p>
+  <% end %>
+
   <p><%= "From: #{booking.user.username}" %></p>
   <p><%= "Status: #{booking.status}" %></p>
 
