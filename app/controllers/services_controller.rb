@@ -3,6 +3,14 @@ class ServicesController < ApplicationController
 
   def index
     @services = policy_scope(Service)
+
+    @markers = @services.geocoded.map do |service|
+      {
+        lat: service.latitude,
+        lng: service.longitude,
+        info_window: render_to_string(partial: "services/partials/info_window", locals: { service: service })
+      }
+    end
   end
 
   def show
