@@ -1,18 +1,39 @@
 <h1 class="ml-3 mt-3 text-center">All services</h1>
 
+<%= form_tag services_path, method: :get, class: "mb-3 text-center " do %>
+  <%= text_field_tag :title_username,
+                     params[:title_username],
+                     placeholder: "Power or hero" %>
+
+  <%= text_field_tag :address,
+                     params[:address],
+                     placeholder: "Address" %>
+
+  <%= text_field_tag :start_date,
+                     params[:start_date],
+                     placeholder: "From (date)" %>
+
+  <%= text_field_tag :end_date,
+                     params[:end_date],
+                     placeholder: "To (date)" %>
+
+  <%= submit_tag "Search a service" %>
+<% end %>
+
 <div class="d-flex">
   <div data-controller="refresh-services-list">
     <%= form_with url: services_path,
                   method: :get,
                   html: { class: "ml-3", data: { refresh_services_list_target: "form" } } do |f| %>
-      <%= f.text_field :query,
-                      placeholder: "Search a service",
+      <%= f.text_field :stimulus_query,
+                      placeholder: "Search service",
                       data: {
                         refresh_services_list_target: "input",
                         action: "keyup->refresh-services-list#update" } %>
     <% end %>
 
     <%= render "services/partials/list", services: @services %>
+
   </div>
 
   <div id="map"
@@ -21,3 +42,4 @@
       data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
 </div>
+

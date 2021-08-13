@@ -36,6 +36,7 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'cloudinary'
 gem 'geocoder'
+gem 'pg_search'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
