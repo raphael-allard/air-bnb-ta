@@ -28,7 +28,9 @@ import "controllers";
 
 // Internal imports, e.g:
 import { initMapbox } from "../plugins/init_mapbox";
+import { initFlatpickr } from "../plugins/init_flatpickr";
 
 document.addEventListener('turbolinks:load', () => {
   initMapbox();
+  initFlatpickr();
 });

@@ -1,0 +1,14 @@
+.card-review {
+  width: 300px;
+  height: 180px;
+  background-color: #9ce4de;
+  padding: 10px;
+  border-radius: 3px;
+  margin-left: 5px;
+  margin-top: 10px;
+  p:last-child {
+    overflow: overlay;
+    height: 75px;
+    padding-right: 15px;
+  }
+}
