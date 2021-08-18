@@ -1,20 +1,30 @@
 <h1 class="m-3"><%= "#{@service.title} service by #{@service.user.username}" %></h1>
 
-<div class="m-3">
-  <p><%= "Description: #{@service.description}" %></p>
-  <p><%= "Price: #{@service.price}€" %></p>
-  <p><%= "Address: #{@service.address}" %></p>
-</div>
+<div data-controller="change-price">
+  <div class="m-3">
+    <p><%= "Description: #{@service.description}" %></p>
+    <p>Price:<span data-change-price-target="price" data-price="<%= @service.price %>"><%= @service.price %></span>€</p>
+    <p><%= "Address: #{@service.address}" %></p>
+  </div>
 
-<% if policy(Booking).new? %>
-  <h2 class="ml-3 mt-5">Book service:</h2>
+  <% if policy(Booking).new? %>
+    <h2 class="ml-3 mt-5">Book service:</h2>
 
-  <%= simple_form_for [@service, @booking], html: { class: "m-3" } do |f| %>
-    <%= f.input :start_date, as: :string, input_html: { id: "range_start", class: "datepicker" } %>
-    <%= f.input :end_date, as: :string, input_html: { id: "range_end", class: "datepicker" } %>
-    <%= f.submit class: "btn btn-primary" %>
+    <%= simple_form_for [@service, @booking], html: { class: "m-3" } do |f| %>
+      <%= f.input :start_date,
+                  as: :string,
+                  input_html: { id: "range_start",
+                                class: "datepicker",
+                                data: { change_price_target: "startDate",
+                                        action: "change->change-price#update" } } %>
+      <%= f.input :end_date,
+                  as: :string,
+                  input_html: { id: "range_end",
+                                class: "datepicker" } %>
+      <%= f.submit class: "btn btn-primary" %>
+    <% end %>
   <% end %>
-<% end %>
+</div>
 
 <% if policy(@service).update? %>
   <%= link_to "Edit service", edit_service_path(@service), class: "btn btn-secondary ml-3" %>
